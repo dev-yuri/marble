@@ -5,18 +5,17 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     private Transform _player;
-    private float _sensitivity;
-    private GameObject _camera;
+    [SerializeField] private float _sensitivity;
+    
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        _camera = GameObject.Find("Main Camera");
         _sensitivity = 1f;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {    
         //the camera will follow the player and rotates around the player. for the rotation to work it's needed a offset on the Camera object (Inspector). It would be better to add directly in the code however, which is not done currently.
 

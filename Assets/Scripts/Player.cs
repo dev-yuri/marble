@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +7,18 @@ public class Player : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     private Transform _focalPoint;
+    private AudioSource _audioSource;
+
     private float _verticalInput;
     private float _horizontalInput;
-
+    [SerializeField] private AudioClip _bounceAudio;
     [SerializeField] private float _moveForce;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _focalPoint = GameObject.Find("Camera").GetComponent<Transform>();
+        _audioSource = GetComponent<AudioSource>();
         _moveForce = 2f;
     }
 
@@ -27,7 +31,15 @@ public class Player : MonoBehaviour
         _rigidbody.AddForce(_focalPoint.right * _horizontalInput * _moveForce);
         _rigidbody.AddForce(_focalPoint.forward * _verticalInput * _moveForce);
 
+
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button14))
             _rigidbody.AddForce(_focalPoint.up * 5, ForceMode.Impulse);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //trying to simulate the level of audio due to the velocity of the player
+        if (_rigidbody.velocity.magnitude > 0)
+            _audioSource.PlayOneShot(_bounceAudio, _rigidbody.velocity.magnitude * .75f);
     }
 }
