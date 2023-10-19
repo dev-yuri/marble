@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private float _horizontalInput;
     [SerializeField] private AudioClip _bounceAudio;
     [SerializeField] private float _moveForce;
+    private float _jumpForce;
+    private bool _isOnGround;
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,6 +22,7 @@ public class Player : MonoBehaviour
         _focalPoint = GameObject.Find("Camera").GetComponent<Transform>();
         _audioSource = GetComponent<AudioSource>();
         _moveForce = 2f;
+        _jumpForce = 5f;
     }
 
     // Update is called once per frame
@@ -32,14 +35,24 @@ public class Player : MonoBehaviour
         _rigidbody.AddForce(_focalPoint.forward * _verticalInput * _moveForce);
 
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button14))
-            _rigidbody.AddForce(_focalPoint.up * 5, ForceMode.Impulse);
+        if (Input.GetKeyDown(KeyCode.Space))
+            Jump();
     }
 
     private void OnCollisionEnter(Collision other)
     {
+        _isOnGround = true;
         //trying to simulate the level of audio due to the velocity of the player
         if (_rigidbody.velocity.magnitude > 0)
             _audioSource.PlayOneShot(_bounceAudio, _rigidbody.velocity.magnitude * .75f);
+    }
+
+    public void Jump()
+    {
+        if (_isOnGround)
+        {
+            _rigidbody.AddForce(_focalPoint.up * _jumpForce, ForceMode.Impulse);
+            _isOnGround = false;
+        }        
     }
 }
