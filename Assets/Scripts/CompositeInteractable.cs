@@ -18,6 +18,6 @@ public class CompositeInteractable : MonoBehaviour, IInteractable
 
     public void DisplayBubble(bool displayMessage)
     {
-
+        
     }
 }

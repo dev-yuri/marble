@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Windows.Speech;
 
 public class Lift : MonoBehaviour, IInteractable
 {
     private float _maxRange;
     private float _minRange;
     private float _speed;
-    private float _interactRange;
-    
     private bool _isMoving;
-    private bool _displayMessage;
+    public enum Direction {Up, Down}
+    private Direction _direction;
+    private TextMeshPro _textMessage;
+    private SpriteRenderer _background;
+    private Transform _message;
+    private Transform _lookAt;
 
-    private Collider[] _colliderArray;
+    private LiftButton _liftButton;
 
     // Update is called once per frame
     private void Start()
@@ -22,64 +22,108 @@ public class Lift : MonoBehaviour, IInteractable
         _maxRange = 5f;
         _minRange = 0.05f;
         _speed = 1f;
-        _interactRange = 1f;
+        
+        _textMessage = transform.Find("Message/Text").GetComponent<TextMeshPro>();
+        _background = transform.Find("Message/Background").GetComponent<SpriteRenderer>();
+        _message = transform.Find("Message").GetComponent<Transform>();
+
+        _message.transform.gameObject.SetActive(false);
+        
+        _lookAt = GameObject.Find("Camera").GetComponent<Transform>();
+
+        _liftButton = GameObject.Find("LiftButton").GetComponent<LiftButton>();
+        _liftButton.OnButtonPressed += Interact;
     }
 
-    
+    private void OnDestroy()
+    {
+        _liftButton.OnButtonPressed -= Interact;
+    }
+
+
     private void Update() 
     {
-        DisplayBubble(_displayMessage);
-
-        if (_isMoving && transform.position.y < _maxRange)
-            transform.Translate(Vector3.up * Time.deltaTime * _speed);
+        if (_isMoving)
+        {
+            if (_direction == Direction.Up)
+                transform.Translate(Vector3.up * Time.deltaTime * _speed);
+            else if (_direction == Direction.Down)
+                transform.Translate(Vector3.down * Time.deltaTime * _speed);
+        }        
         
-        if (_isMoving && transform.position.y >= 0)
-            transform.Translate(Vector3.up * Time.deltaTime * _speed);
-
         if (transform.position.y > _maxRange)
         {
             transform.position = new Vector3 (transform.position.x, _maxRange, transform.position.z);
             _isMoving = false;
-            _speed = -_speed;
+            _direction = Direction.Down;
         }
 
-        if (transform.position.y < _minRange)
+        if (transform.position.y <= _minRange)
         {
             transform.position = new Vector3 (transform.position.x, _minRange, transform.position.z);
             _isMoving = false;
-            _speed = -_speed;
-        }   
-    }
-    
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-            _displayMessage = true;
+            _direction = Direction.Up;
+        }
+
+        _message.transform.rotation = _lookAt.transform.rotation;
     }
 
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player") && _isMoving == false)
+        {
+            DisplayMessage(_direction);
+            _message.gameObject.SetActive(true);
+        }
+
+    }
     private void OnCollisionExit(Collision other)
     {
-        _displayMessage = false;
+        _message.gameObject.SetActive(false);
     }
 
-    public void DisplayBubble(bool displayMessage)
+    private void DisplayMessage(Direction direction)
     {
-        if (displayMessage)
+        switch (direction)
         {
-            _colliderArray = Physics.OverlapSphere(transform.position, _interactRange);
-
-            foreach (Collider collider in _colliderArray)
-            {
-                if (collider.TryGetComponent(out Player player))
-                    Debug.Log("Bubble chat pops up");
-            }
+            case Direction.Up:
+                _textMessage.text = "Up";
+                break;
+            case Direction.Down:
+                _textMessage.text = "Down";
+                break;
+            default:
+                break;
         }
+
+        _background.size = new Vector2(_textMessage.preferredWidth + .2f, _textMessage.preferredHeight + .2f);
     }
 
     public void Interact()
     {
         _isMoving = true;
-        _displayMessage = false;
+        _message.gameObject.SetActive(false);
+
+        // if (transform.position.y == _maxRange)
+        //      Move(Direction.Down);
+        // else if (transform.position.y == _minRange)
+        //      Move(Direction.Up);
     }
-         
+
+    private void Move(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Up:
+                //_animator.SetBool("Up", true);
+                break;
+            case Direction.Down:
+                //_animator.SetBool("Down", true);
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

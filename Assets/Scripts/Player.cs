@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,6 +9,7 @@ public class Player : MonoBehaviour
     private float _verticalInput;
     private float _horizontalInput;
     [SerializeField] private AudioClip _bounceAudio;
+    [SerializeField] private AudioClip _marbleAudio;
     [SerializeField] private float _moveForce;
     private float _jumpForce;
     private bool _isOnGround;
@@ -44,7 +42,13 @@ public class Player : MonoBehaviour
         _isOnGround = true;
         //trying to simulate the level of audio due to the velocity of the player
         if (_rigidbody.velocity.magnitude > 0)
-            _audioSource.PlayOneShot(_bounceAudio, _rigidbody.velocity.magnitude * .75f);
+        {
+            if (other.gameObject.CompareTag("Bed"))
+                _audioSource.PlayOneShot(_bounceAudio, 1f);
+            else
+                _audioSource.PlayOneShot(_marbleAudio, _rigidbody.velocity.magnitude * .75f);
+        }
+            
     }
 
     public void Jump()
