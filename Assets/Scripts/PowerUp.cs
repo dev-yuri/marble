@@ -7,6 +7,9 @@ public class PowerUp : MonoBehaviour
     [SerializeField] private AudioClip _audioEffect;
     private AudioSource _audio;
 
+    public delegate void powerUpPicked();
+    public static event powerUpPicked OnPowerUpPicked; 
+
     
     private void Awake()
     {
@@ -22,7 +25,9 @@ public class PowerUp : MonoBehaviour
             _audio.PlayOneShot(_audioEffect, 1f);
 
             Destroy(gameObject);
-            Destroy(particleObj, 1);            
+            Destroy(particleObj, 1);
+
+            OnPowerUpPicked?.Invoke();       
         }            
     }
 }
