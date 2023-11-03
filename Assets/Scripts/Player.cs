@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float _moveForce;
     private float _jumpForce;
     private bool _isOnGround;
+
+    public delegate void PowerUpHandler();
+    public event PowerUpHandler PowerUpPicked;
     // Start is called before the first frame update
     void Awake()
     {
@@ -47,8 +50,13 @@ public class Player : MonoBehaviour
                 _audioSource.PlayOneShot(_bounceAudio, 1f);
             else
                 _audioSource.PlayOneShot(_marbleAudio, _rigidbody.velocity.magnitude * .75f);
-        }
-            
+        }            
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PowerUp"))
+            PowerUpPicked?.Invoke();
     }
 
     public void Jump()

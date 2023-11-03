@@ -14,7 +14,7 @@ public class Lift : MonoBehaviour, IInteractable
     private Transform _message;
     private Transform _lookAt;
 
-    private LiftButton _liftButton;
+    [SerializeField] private Button _liftButton;
 
     // Update is called once per frame
     private void Start()
@@ -31,7 +31,6 @@ public class Lift : MonoBehaviour, IInteractable
         
         _lookAt = GameObject.Find("Camera").GetComponent<Transform>();
 
-        _liftButton = GameObject.Find("LiftButton").GetComponent<LiftButton>();
         _liftButton.OnButtonPressed += Interact;
     }
 
@@ -87,10 +86,10 @@ public class Lift : MonoBehaviour, IInteractable
         switch (direction)
         {
             case Direction.Up:
-                _textMessage.text = "Up";
+                _textMessage.text = "Press G to go up";
                 break;
             case Direction.Down:
-                _textMessage.text = "Down";
+                _textMessage.text = "Press G to go down";
                 break;
             default:
                 break;
@@ -103,27 +102,5 @@ public class Lift : MonoBehaviour, IInteractable
     {
         _isMoving = true;
         _message.gameObject.SetActive(false);
-
-        // if (transform.position.y == _maxRange)
-        //      Move(Direction.Down);
-        // else if (transform.position.y == _minRange)
-        //      Move(Direction.Up);
     }
-
-    private void Move(Direction direction)
-    {
-        switch (direction)
-        {
-            case Direction.Up:
-                //_animator.SetBool("Up", true);
-                break;
-            case Direction.Down:
-                //_animator.SetBool("Down", true);
-                break;
-            default:
-                break;
-        }
-    }
-
-
 }
