@@ -1,6 +1,4 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -86,7 +84,7 @@ public class UIHandler : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        Debug.Log("Sorry, there is no more level, yet ...");
+        Debug.Log("Sorry, there is no more levels, yet ...");
     }
 
     public void ExitGame()
