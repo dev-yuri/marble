@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 3337907084740325671}
   - component: {fileID: 6899908358143554107}
   - component: {fileID: 1624308086647801254}
-  - component: {fileID: 1930526729927525981}
   - component: {fileID: 6768743562686092422}
   - component: {fileID: 6474416148931644245}
   - component: {fileID: 2635605055373391424}
+  - component: {fileID: 7486635486212546503}
+  - component: {fileID: 149992442601254279}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -66,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b5bb708b1fa0c3468f5176fb2e03a17, type: 2}
+  - {fileID: 2100000, guid: 722c82c6afc7a5c41b06c17d0b4d0a3c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,21 +110,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1930526729927525981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4880614683753444176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 851944ee2325068469db39710a37c76e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bounceAudio: {fileID: 8300000, guid: 2158480f5026a3a428b5fef5ea4b4e7b, type: 3}
-  _marbleAudio: {fileID: 8300000, guid: 8bc544d75ea69df4c8e8d92c2fd82fdc, type: 3}
-  _moveForce: 5
 --- !u!54 &6768743562686092422
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -260,3 +246,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1
+--- !u!114 &7486635486212546503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880614683753444176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28c2524ff18de14eb2758d2cf60fb76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounceAudio: {fileID: 8300000, guid: 2158480f5026a3a428b5fef5ea4b4e7b, type: 3}
+  _marbleAudio: {fileID: 8300000, guid: 8bc544d75ea69df4c8e8d92c2fd82fdc, type: 3}
+--- !u!114 &149992442601254279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880614683753444176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597ff7dda3d09f44ea75b2b058e551a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

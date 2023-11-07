@@ -1,13 +1,15 @@
 public class PlayerMovementStateMachine : StateMachine
 {
+    public PlayerNew Player {get; }
     public PlayerIdlingState IdlingState {get; }
     public PlayerMovingState MovingState {get; }
     public PlayerJumpingState JumpingState {get; }
 
-    public PlayerMovementStateMachine()
+    public PlayerMovementStateMachine(PlayerNew player)
     {
-        IdlingState = new PlayerIdlingState();
-        MovingState = new PlayerMovingState();
-        JumpingState = new PlayerJumpingState();
+        Player = player;
+        IdlingState = new PlayerIdlingState(this);
+        MovingState = new PlayerMovingState(this);
+        JumpingState = new PlayerJumpingState(this);
     }
 }

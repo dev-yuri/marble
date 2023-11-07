@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int _counter;
-    private Player _player;
+    private PlayerNew _player;
 
     public delegate void CounterHandler(int counter);
     public event CounterHandler Counted;
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         _counter = 0;
-        _player = GameObject.Find("Player").GetComponent<Player>();
+        _player = GameObject.Find("Player").GetComponent<PlayerNew>();
         _level = (Level)SceneManager.GetActiveScene().buildIndex;
     }
 
