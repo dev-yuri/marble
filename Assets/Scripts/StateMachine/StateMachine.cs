@@ -9,10 +9,10 @@ public abstract class StateMachine
         CurrentState.Enter();
     }
 
-    public void HandleInput()
+    /*public void HandleInput()
     {
         CurrentState?.HandleInput();
-    }
+    }*/
 
     public void Update()
     {

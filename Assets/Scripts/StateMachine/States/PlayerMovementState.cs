@@ -7,6 +7,7 @@ public class PlayerMovementState : IState
 
     protected Vector3 movementInput;
     protected float _moveForce = 5f;
+    protected float _jumpForce = 5f;
     protected float _speedModifier = 1f;
 
     public PlayerMovementState (PlayerMovementStateMachine playerMovementStateMachine)

@@ -26,6 +26,6 @@ public class PlayerIdlingState : PlayerMovementState
 
     private void OnMove()
     {
-        throw new NotImplementedException();
+        stateMachine.ChangeState(stateMachine.MovingState);
     }
 }
