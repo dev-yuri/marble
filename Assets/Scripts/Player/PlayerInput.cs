@@ -22,5 +22,16 @@ public class PlayerInput : MonoBehaviour
         return xDirection + zDirection;
     }
 
-    // TODO: HandleInteraction, HandleCameraRotation
+    public bool HandleJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Jump");
+            return true;
+        }
+            
+        return false;
+    }
+
+    // TODO: HandleInteraction
 }

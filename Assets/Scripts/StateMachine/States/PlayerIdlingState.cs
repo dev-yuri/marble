@@ -6,20 +6,19 @@ public class PlayerIdlingState : PlayerMovementState
 {
     public PlayerIdlingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
-
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-        _speedModifier = 0f;
     }
 
     public override void Update()
     {
         base.Update();
 
-        if (stateMachine.Player.Input.HandleInputMovement() == Vector3.zero)
+        if (stateMachine.Player.Rigidbody.velocity != Vector3.zero)      
+            ResetVelocity();
+
+        if (JumpInput() && stateMachine.Player.Grounded)
+            OnJump();
+
+        if (MovementInput() == Vector3.zero)
             return;
         OnMove();
     }
@@ -27,5 +26,10 @@ public class PlayerIdlingState : PlayerMovementState
     private void OnMove()
     {
         stateMachine.ChangeState(stateMachine.MovingState);
+    }
+
+    private void OnJump()
+    {
+        stateMachine.ChangeState(stateMachine.JumpingState);
     }
 }

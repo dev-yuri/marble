@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovementState : IState
@@ -21,46 +20,47 @@ public class PlayerMovementState : IState
     }
 
     public virtual void Exit()
-    {
-        
+    {        
     }
 
     public virtual void HandleInput()
     {
-        //ReadMovementInput();
     } 
 
     public virtual void PhysicsUpdate()
     {
-       Move();
     }
 
     public virtual void Update()
     {
-        
+        if(stateMachine.Player.transform.position.y < -5)
+        {
+            stateMachine.Player.Rigidbody.velocity = new Vector3(0f, 0f, 0f);
+            stateMachine.Player.transform.position = new Vector3(10f, 10f, 10f);
+        }
+            
     }
 
-    protected Vector3 ReadMovementInput()
+    protected Vector3 MovementInput()
     {
         return stateMachine.Player.Input.HandleInputMovement();
     }
 
-    private void Move()
+    protected bool JumpInput()
     {
-        Vector3 moveDirection = ReadMovementInput();
-
-        if (moveDirection == Vector3.zero || _speedModifier == 0f)
-            return;
-        Vector3 currentVelocity = CurrentVelocity();
-
-        stateMachine.Player.Rigidbody.AddForce(moveDirection * _moveForce * _speedModifier - currentVelocity, ForceMode.VelocityChange);
+        return stateMachine.Player.Input.HandleJump();
     }
 
-    Vector3 CurrentVelocity()
+    protected Vector3 CurrentVelocity()
     {
         Vector3 currentVelocity = stateMachine.Player.Rigidbody.velocity;
         currentVelocity.y = 0f; // to not interfere with gravity
 
         return currentVelocity;
+    }
+
+    protected void ResetVelocity()
+    {
+        stateMachine.Player.Rigidbody.velocity = new Vector3(0f, stateMachine.Player.Rigidbody.velocity.y, 0f);
     }
 }

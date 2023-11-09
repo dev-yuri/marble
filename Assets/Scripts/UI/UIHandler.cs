@@ -14,9 +14,6 @@ public class UIHandler : MonoBehaviour
     private AudioSource _audioSource;
     [SerializeField] private AudioClip _finishedAudio;
 
-
-
-    // Start is called before the first frame update
     void Awake()
     {
         _score = transform.Find("Score").GetComponent<TextMeshProUGUI>();

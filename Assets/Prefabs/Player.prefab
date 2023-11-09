@@ -15,8 +15,10 @@ GameObject:
   - component: {fileID: 6768743562686092422}
   - component: {fileID: 6474416148931644245}
   - component: {fileID: 2635605055373391424}
-  - component: {fileID: 7486635486212546503}
   - component: {fileID: 149992442601254279}
+  - component: {fileID: 3339810690174811731}
+  - component: {fileID: 7847154689417954125}
+  - component: {fileID: 6147792825669594271}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -246,20 +248,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1
---- !u!114 &7486635486212546503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4880614683753444176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c28c2524ff18de14eb2758d2cf60fb76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bounceAudio: {fileID: 8300000, guid: 2158480f5026a3a428b5fef5ea4b4e7b, type: 3}
-  _marbleAudio: {fileID: 8300000, guid: 8bc544d75ea69df4c8e8d92c2fd82fdc, type: 3}
 --- !u!114 &149992442601254279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,3 +260,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 597ff7dda3d09f44ea75b2b058e551a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3339810690174811731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880614683753444176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec916dfdcec68142a7c4a94bae56628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7847154689417954125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880614683753444176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ffc677ac90fb74b8f53c08e24905e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6147792825669594271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4880614683753444176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337f16b7c30bb834d91e43f3f187da64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounceAudio: {fileID: 8300000, guid: 2158480f5026a3a428b5fef5ea4b4e7b, type: 3}
+  _marbleAudio: {fileID: 8300000, guid: 8bc544d75ea69df4c8e8d92c2fd82fdc, type: 3}

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int _counter;
-    private PlayerNew _player;
+    private PlayerEvents _playerEvents;
 
     public delegate void CounterHandler(int counter);
     public event CounterHandler Counted;
@@ -18,21 +18,19 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         _counter = 0;
-        _player = GameObject.Find("Player").GetComponent<PlayerNew>();
+        _playerEvents = GameObject.Find("Player").GetComponent<PlayerEvents>();
         _level = (Level)SceneManager.GetActiveScene().buildIndex;
     }
 
     private void OnEnable()
     {
-        _player.PowerUpPicked += OnPowerUpPicked;
+        _playerEvents.PowerUpPicked += OnPowerUpPicked;
     }
 
     private void OnDisable()
     {
-        _player.PowerUpPicked -= OnPowerUpPicked;
+        _playerEvents.PowerUpPicked -= OnPowerUpPicked;
     }
-
-    // Update is called once per frame
 
     void OnPowerUpPicked()
     {

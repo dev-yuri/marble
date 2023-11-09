@@ -32,8 +32,4 @@ public class Button : MonoBehaviour, IInteractable
         _animator.SetTrigger("Press");
         _audioSource.PlayOneShot(_audioClip);
     }
-
-
-
-
 }
