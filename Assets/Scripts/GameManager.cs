@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     private int _counter;
     private PlayerEvents _playerEvents;
 
+    GameStateMachine gameStateMachine;
+
     public delegate void CounterHandler(int counter);
     public event CounterHandler Counted;
 
@@ -20,6 +22,18 @@ public class GameManager : MonoBehaviour
         _counter = 0;
         _playerEvents = GameObject.Find("Player").GetComponent<PlayerEvents>();
         _level = (Level)SceneManager.GetActiveScene().buildIndex;
+
+        gameStateMachine = new GameStateMachine(this);
+    }
+
+    void Start()
+    {
+        gameStateMachine.ChangeState(new PlayingState(gameStateMachine));//gameStateMachine.PlayingState);
+    }
+
+    void Update()
+    {
+        gameStateMachine.Update();
     }
 
     private void OnEnable()
