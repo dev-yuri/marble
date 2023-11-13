@@ -8,6 +8,8 @@ TagManager:
   - Message
   - Bed
   - PowerUp
+  - Ladder
+  - End of ladder
   layers:
   - Default
   - TransparentFX

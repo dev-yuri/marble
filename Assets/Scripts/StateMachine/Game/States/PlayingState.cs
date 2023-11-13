@@ -8,22 +8,13 @@ public class PlayingState : IState
         GameStateMachine = gameStateMachine;
     }
 
+    #region "IState methods"
     public void Enter()
     {
-       Debug.Log("Game state: " + GetType().Name);
+        Debug.Log("Game state: " + GetType().Name);
     }
 
     public void Exit()
-    {
-        
-    }
-
-    public void HandleInput()
-    {
-        
-    }
-
-    public void PhysicsUpdate()
     {
 
     }
@@ -32,8 +23,17 @@ public class PlayingState : IState
     {
         if (Input.GetKeyDown(KeyCode.P))
             GameStateMachine.ChangeState(new PausedState(GameStateMachine));
-            // if the "PausedState" is chached in the GameStateMachine
-            // GameStateMachine.ChangeState(GameStateMachine.PausedState);
-
+        // if the "PausedState" is chached in the GameStateMachine
+        // GameStateMachine.ChangeState(GameStateMachine.PausedState);
     }
+
+    public void OnTriggerEnter(Collider other)
+    {        
+    }
+
+    public void PhysicsUpdate()
+    {        
+    }
+
+    #endregion
 }

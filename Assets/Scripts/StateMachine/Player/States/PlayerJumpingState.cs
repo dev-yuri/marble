@@ -6,6 +6,7 @@ public class PlayerJumpingState : PlayerMovementState
     {
     }
 
+    #region "IState methods"
     public override void Enter()
     {
         base.Enter();
@@ -20,4 +21,5 @@ public class PlayerJumpingState : PlayerMovementState
         if (stateMachine.Player.Grounded)
             stateMachine.ChangeState(stateMachine.IdlingState);        
     }
+    #endregion
 }

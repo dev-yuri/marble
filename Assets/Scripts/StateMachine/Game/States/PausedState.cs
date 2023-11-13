@@ -8,6 +8,8 @@ public class PausedState : IState
         GameStateMachine = gameStateMachine;
     }
 
+    #region "IState methods"
+
     public void Enter()
     {
         Debug.Log("Game state: " + GetType().Name);
@@ -17,14 +19,6 @@ public class PausedState : IState
     {        
     }
 
-    public void HandleInput()
-    {        
-    }
-
-    public void PhysicsUpdate()
-    {
-        
-    }
 
     public void Update()
     {
@@ -33,4 +27,15 @@ public class PausedState : IState
             // if the "PlayingState" is chached in the GameStateMachine
             // GameStateMachine.ChangeState(GameStateMachine.PlayingState);     
     }
+
+    
+    public void OnTriggerEnter(Collider other)
+    {        
+    }
+
+    public void PhysicsUpdate()
+    {        
+    }
+
+    #endregion
 }

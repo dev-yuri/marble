@@ -4,6 +4,8 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private float interactRange;
     private Collider[] colliderArray;
+
+    public string ObjectName {get; private set;}
     // Update is called once per frame
     void Update()
     {
@@ -17,7 +19,10 @@ public class PlayerInteraction : MonoBehaviour
         foreach (Collider collider in colliderArray)
         {
             if (collider.TryGetComponent(out IInteractable interactableObject))
+            {
                 interactableObject.Interact();
+                ObjectName = collider.gameObject.name;
+            }
         }
     }
 }

@@ -9,23 +9,24 @@ public class PlayerMovementState : IState
     protected float _jumpForce = 5f;
     protected float _speedModifier = 1f;
 
-    public PlayerMovementState (PlayerMovementStateMachine playerMovementStateMachine)
+    public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
     {
         stateMachine = playerMovementStateMachine;
     }
 
+    #region "IState methods"
     public virtual void Enter()
     {
         Debug.Log("State:" + GetType().Name);
     }
 
     public virtual void Exit()
-    {        
+    {
     }
 
     public virtual void HandleInput()
     {
-    } 
+    }
 
     public virtual void PhysicsUpdate()
     {
@@ -33,14 +34,22 @@ public class PlayerMovementState : IState
 
     public virtual void Update()
     {
-        if(stateMachine.Player.transform.position.y < -5)
+        if (stateMachine.Player.transform.position.y < -5)
         {
             stateMachine.Player.Rigidbody.velocity = new Vector3(0f, 0f, 0f);
             stateMachine.Player.transform.position = new Vector3(10f, 10f, 10f);
         }
-            
     }
 
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+
+    }
+
+    #endregion
+
+    #region "Other methods"
     protected Vector3 MovementInput()
     {
         return stateMachine.Player.Input.HandleInputMovement();
@@ -51,6 +60,7 @@ public class PlayerMovementState : IState
         return stateMachine.Player.Input.HandleJump();
     }
 
+
     protected Vector3 CurrentVelocity()
     {
         Vector3 currentVelocity = stateMachine.Player.Rigidbody.velocity;
@@ -59,8 +69,21 @@ public class PlayerMovementState : IState
         return currentVelocity;
     }
 
+    protected Vector3 YCurrentVelocity()
+    {
+        Vector3 YVelocity = new Vector3(0f, stateMachine.Player.Rigidbody.velocity.y, 0f);
+        return YVelocity;
+    }
+
     protected void ResetVelocity()
     {
         stateMachine.Player.Rigidbody.velocity = new Vector3(0f, stateMachine.Player.Rigidbody.velocity.y, 0f);
     }
+
+    protected string InteractableObjectName()
+    {
+        return stateMachine.Player.Interaction.ObjectName;
+    }
+    #endregion
+
 }

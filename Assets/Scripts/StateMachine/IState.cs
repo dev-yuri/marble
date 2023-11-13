@@ -1,8 +1,9 @@
+using UnityEngine;
 public interface IState
 {
     public void Enter();
     public void Exit();
-    public void HandleInput();
     public void Update();
-    public void PhysicsUpdate();    
+    public void PhysicsUpdate();
+    public void OnTriggerEnter(Collider other);
 }

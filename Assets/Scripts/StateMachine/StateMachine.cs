@@ -1,6 +1,8 @@
+using UnityEngine;
+
 public abstract class StateMachine
 {
-    protected IState CurrentState {get; private set;}    
+    protected IState CurrentState {get; private set;} 
 
     public void ChangeState(IState newState)
     {
@@ -22,5 +24,10 @@ public abstract class StateMachine
     public void PhysicsUpdate()
     {
         CurrentState?.PhysicsUpdate();
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        CurrentState?.OnTriggerEnter(other);
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerIdlingState : PlayerMovementState
@@ -8,6 +6,7 @@ public class PlayerIdlingState : PlayerMovementState
     {
     }
 
+    #region "IState methods"
     public override void Update()
     {
         base.Update();
@@ -20,9 +19,12 @@ public class PlayerIdlingState : PlayerMovementState
 
         if (MovementInput() == Vector3.zero)
             return;
+
         OnMove();
     }
+    #endregion
 
+    #region "Other methods"
     private void OnMove()
     {
         stateMachine.ChangeState(stateMachine.MovingState);
@@ -32,4 +34,10 @@ public class PlayerIdlingState : PlayerMovementState
     {
         stateMachine.ChangeState(stateMachine.JumpingState);
     }
+
+    private void OnLadder()
+    {
+        stateMachine.ChangeState(stateMachine.PlayerStairState);
+    }
+    #endregion
 }

@@ -18,8 +18,9 @@ public class Button : MonoBehaviour, IInteractable
 
     public void ButtonPress()
     {
+        ButtonEffects();    
         OnButtonPressed?.Invoke();
-        ButtonEffects();
+        
     }
 
     public void Interact()

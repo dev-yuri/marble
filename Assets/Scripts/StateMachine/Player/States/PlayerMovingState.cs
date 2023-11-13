@@ -6,15 +6,16 @@ public class PlayerMovingState : PlayerMovementState
     {
     }
 
+    #region "IState methods"
     public override void Update()
     {
         base.Update();
 
-        if (JumpInput())
+        if (JumpInput() && stateMachine.Player.Grounded)
             OnJump();
 
         if (MovementInput() == Vector3.zero)
-            OnStop();    
+            OnStop();
     }
 
     public override void PhysicsUpdate()
@@ -22,7 +23,9 @@ public class PlayerMovingState : PlayerMovementState
         base.PhysicsUpdate();
         Move();
     }
+    #endregion
 
+    #region "Other methods"
     private void Move()
     {
         Vector3 moveDirection = MovementInput();
@@ -41,4 +44,7 @@ public class PlayerMovingState : PlayerMovementState
     {
         stateMachine.ChangeState(stateMachine.JumpingState);
     }
+    #endregion
+
+
 }
