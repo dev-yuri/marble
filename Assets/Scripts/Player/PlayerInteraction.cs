@@ -5,12 +5,14 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float interactRange;
     private Collider[] colliderArray;
 
-    public string ObjectName {get; private set;}
+    public string ObjectName {get; set;}
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.G))
+        {
             PlayerInteract();
+        }           
     }
     private void PlayerInteract()
     {

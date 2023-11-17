@@ -13,12 +13,6 @@ public class PlayerStairState : PlayerMovementState
         stateMachine.Player.Rigidbody.useGravity = false;
     }
 
-    public override void Update()
-    {
-        base.Update();
-
-    }
-
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
@@ -29,6 +23,8 @@ public class PlayerStairState : PlayerMovementState
     public override void Exit()
     {
         stateMachine.Player.Rigidbody.useGravity = true;
+        stateMachine.Player.Interaction.ObjectName = "any";
+
         base.Exit();
     }
     
@@ -43,12 +39,8 @@ public class PlayerStairState : PlayerMovementState
     #region "Other methods"
     void MoveLadder()
     {
-        Vector3 direction = MovementInput();
+        Vector3 direction = stateMachine.Player.Input.HandleInputLadder();
         Vector3 currentVelocity = YCurrentVelocity();
-
-        direction.y = direction.z;
-        direction.x = 0;
-        direction.z = 0;
 
         stateMachine.Player.Rigidbody.AddForce(direction * _moveForce * _speedModifier - currentVelocity, ForceMode.VelocityChange);
     }

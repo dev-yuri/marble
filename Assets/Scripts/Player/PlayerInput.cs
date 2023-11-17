@@ -30,4 +30,9 @@ public class PlayerInput : MonoBehaviour
         return false;
     }
 
+    public Vector3 HandleInputLadder()
+    {
+        return Vector3.up * Input.GetAxis("Vertical");
+    }
+
 }

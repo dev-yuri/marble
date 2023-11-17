@@ -50,5 +50,4 @@ public class PlayerController : MonoBehaviour
     {
         Grounded = false;
     }
-
 }

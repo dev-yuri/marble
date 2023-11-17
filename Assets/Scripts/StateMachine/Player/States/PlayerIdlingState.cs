@@ -17,10 +17,13 @@ public class PlayerIdlingState : PlayerMovementState
         if (JumpInput() && stateMachine.Player.Grounded)
             OnJump();
 
-        if (MovementInput() == Vector3.zero)
+        else if (MovementInput() == Vector3.zero)
             return;
-
-        OnMove();
+        
+        else if (InteractableObjectName() == "Ladder")
+            OnLadder();
+        else 
+            OnMove();
     }
     #endregion
 
